@@ -28,3 +28,5 @@ lazy val root = (project in file("."))
   )
 
 coverageEnabled := true
+
+// To get coverage run command: sbt clean coverage test coverageReport
