@@ -4,7 +4,7 @@ import integration.IntegralMethod.IntegralMethod
 
 object IntegralMethod extends Enumeration {
   type IntegralMethod = Value
-  val Rectangle,Trapezoidal = Value
+  val Rectangle, Trapezoidal = Value
 }
 
 /**
@@ -30,16 +30,40 @@ object Integral {
     s
   }
 
+  private def rectangle(f: Double => Double, xStart: Double, xEnd: Double, n: Int): Double = {
+    var s = 0.0
+    val step = (xEnd - xStart) / n
+    for (i <- 0 until n) {
+      val x1 = xStart + step * i
+      val x2 = xStart + step * (i + 1)
+      s += f((x1 + x2) / 2) * step
+    }
+    s
+  }
+
   /**
-    * Computes integration with specified method
+    * Computes integration for points
     *
     * @param points input data: sequence of points(x,y)
-    * @param method specifies method of numeric integration
     * @return value of integration
     */
-  def s(points: Seq[(Double, Double)], method: IntegralMethod = IntegralMethod.Trapezoidal): Double = {
+  def s(points: Seq[(Double, Double)]): Double = {
+    trapezoidal(points)
+  }
+
+  /**
+    * Computes integration for function
+    *
+    * @param f      the function (integrand expression)
+    * @param xStart start argument
+    * @param xEnd   last argument
+    * @param n      number of points
+    * @param method a method; optional, Rectangle is default method
+    * @return value of integration
+    */
+  def s(f: Double => Double, xStart: Double, xEnd: Double, n: Int, method: IntegralMethod = IntegralMethod.Rectangle): Double = {
     method match {
-      case IntegralMethod.Trapezoidal => trapezoidal(points)
+      case IntegralMethod.Rectangle => rectangle(f, xStart, xEnd, n)
     }
   }
 }

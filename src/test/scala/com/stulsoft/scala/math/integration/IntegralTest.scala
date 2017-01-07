@@ -12,8 +12,8 @@ class IntegralTest extends FlatSpec with Matchers {
 
   behavior of "IntegralTest"
 
-  "s" should "compute integration with rectangle method by default" in {
-    var r = Integral.s(List((1.0, 2.0), (2.0, 3.0)), IntegralMethod.Trapezoidal)
+  "s" should "compute integration with trapezoidal method for points" in {
+    var r = Integral.s(List((1.0, 2.0), (2.0, 3.0)))
     r should equal(2.5)
 
     r = Integral.s(List((1.0, 2.0), (2.0, 3.0), (3.0, 4.0)))
@@ -31,5 +31,17 @@ class IntegralTest extends FlatSpec with Matchers {
   it should "compute 0 for collection with 1 item" in {
     val r = Integral.s(List((1.0, 2.0)))
     r should equal(0.0)
+  }
+
+  "s" should "compute integration with rectangle method for function" in {
+    var r = Integral.s((x) => x, 0.0, 3.0, 10, IntegralMethod.Rectangle)
+    Math.abs(r - 4.5) should be < 0.0001
+
+    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Rectangle)
+    Math.abs(r - 4.5) should be < 0.0001
+  }
+  it  should "compute integration with rectangle method for function with default method" in {
+    val r = Integral.s((x) => x, 0.0, 3.0, 10)
+    Math.abs(r - 4.5) should be < 0.0001
   }
 }
