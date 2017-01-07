@@ -44,4 +44,11 @@ class IntegralTest extends FlatSpec with Matchers {
     val r = Integral.s((x) => x, 0.0, 3.0, 10)
     Math.abs(r - 4.5) should be < 0.0001
   }
+  it should "compute integration with trapezoidal method" in{
+    var r = Integral.s((x) => x, 0.0, 3.0, 10, IntegralMethod.Trapezoidal)
+    Math.abs(r - 4.5) should be < 0.0001
+
+    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Trapezoidal)
+    Math.abs(r - 4.5) should be < 0.0001
+  }
 }

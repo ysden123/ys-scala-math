@@ -30,6 +30,17 @@ object Integral {
     s
   }
 
+  private def trapezoidal(f: Double => Double, xStart: Double, xEnd: Double, n: Int): Double = {
+    var s = 0.0
+    val step = (xEnd - xStart) / n
+    for (i <- 0 until n) {
+      val x1 = xStart + step * i
+      val x2 = xStart + step * (i + 1)
+      s += (f(x1) + f(x2)) * step
+    }
+    s * 0.5
+  }
+
   private def rectangle(f: Double => Double, xStart: Double, xEnd: Double, n: Int): Double = {
     var s = 0.0
     val step = (xEnd - xStart) / n
@@ -64,6 +75,8 @@ object Integral {
   def s(f: Double => Double, xStart: Double, xEnd: Double, n: Int, method: IntegralMethod = IntegralMethod.Rectangle): Double = {
     method match {
       case IntegralMethod.Rectangle => rectangle(f, xStart, xEnd, n)
+      case IntegralMethod.Trapezoidal => trapezoidal(f, xStart, xEnd, n)
+      case _ => throw new RuntimeException(s"Unsupported method $method")
     }
   }
 }
