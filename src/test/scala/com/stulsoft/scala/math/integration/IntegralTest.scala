@@ -9,6 +9,7 @@ import org.scalatest.{FlatSpec, Matchers}
   * @author Yuriy Stul
   */
 class IntegralTest extends FlatSpec with Matchers {
+  private val f = (x:Double) => x
 
   behavior of "IntegralTest"
 
@@ -34,21 +35,25 @@ class IntegralTest extends FlatSpec with Matchers {
   }
 
   "s" should "compute integration with rectangle method for function" in {
-    var r = Integral.s((x) => x, 0.0, 3.0, 10, IntegralMethod.Rectangle)
+    var r = Integral.s(f, 0.0, 3.0, 10, IntegralMethod.Rectangle)
     Math.abs(r - 4.5) should be < 0.0001
 
     r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Rectangle)
     Math.abs(r - 4.5) should be < 0.0001
   }
+
   it  should "compute integration with rectangle method for function with default method" in {
-    val r = Integral.s((x) => x, 0.0, 3.0, 10)
+    val r = Integral.s(f, 0.0, 3.0, 10)
     Math.abs(r - 4.5) should be < 0.0001
   }
   it should "compute integration with trapezoidal method" in{
-    var r = Integral.s((x) => x, 0.0, 3.0, 10, IntegralMethod.Trapezoidal)
+    var r = Integral.s(f, 0.0, 3.0, 10, IntegralMethod.Trapezoidal)
     Math.abs(r - 4.5) should be < 0.0001
 
-    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Trapezoidal)
+    r = Integral.s(f, 0.0, 3.0, 100, IntegralMethod.Trapezoidal)
+    Math.abs(r - 4.5) should be < 0.0001
+
+    r = Integral.s(f, 0.0, 3.0, 100, IntegralMethod.Trapezoidal)
     Math.abs(r - 4.5) should be < 0.0001
   }
 }
