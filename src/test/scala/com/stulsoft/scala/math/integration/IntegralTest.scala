@@ -1,5 +1,6 @@
 package com.stulsoft.scala.math.integration
 
+import integration.{Integral, IntegralMethod}
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
@@ -12,7 +13,7 @@ class IntegralTest extends FlatSpec with Matchers {
   behavior of "IntegralTest"
 
   "s" should "compute integration with rectangle method by default" in {
-    var r = Integral.s(List((1.0, 2.0), (2.0, 3.0)), IntegralMethod.Rectangle)
+    var r = Integral.s(List((1.0, 2.0), (2.0, 3.0)), IntegralMethod.Trapezoidal)
     r should equal(2.5)
 
     r = Integral.s(List((1.0, 2.0), (2.0, 3.0), (3.0, 4.0)))

@@ -1,10 +1,10 @@
-package com.stulsoft.scala.math.integration
+package integration
 
-import com.stulsoft.scala.math.integration.IntegralMethod.IntegralMethod
+import integration.IntegralMethod.IntegralMethod
 
 object IntegralMethod extends Enumeration {
   type IntegralMethod = Value
-  val Rectangle = Value
+  val Rectangle,Trapezoidal = Value
 }
 
 /**
@@ -15,14 +15,14 @@ object IntegralMethod extends Enumeration {
 object Integral {
 
   /**
-    * Computes integration by formula for rectangle method.
+    * Computes integration by formula for trapezoidal method.
     *
     * Result is ((y1 + y2) / 2)*(x2 - x1)
     *
     * @param points input data: sequence of points(x,y)
     * @return value of integration
     */
-  private def rectangle(points: Seq[(Double, Double)]): Double = {
+  private def trapezoidal(points: Seq[(Double, Double)]): Double = {
     var s = 0.0
     for (i <- 1 until points.size) {
       s += (points(i - 1)._2 + points(i)._2) * 0.5 * (points(i)._1 - points(i - 1)._1)
@@ -37,9 +37,9 @@ object Integral {
     * @param method specifies method of numeric integration
     * @return value of integration
     */
-  def s(points: Seq[(Double, Double)], method: IntegralMethod = IntegralMethod.Rectangle): Double = {
+  def s(points: Seq[(Double, Double)], method: IntegralMethod = IntegralMethod.Trapezoidal): Double = {
     method match {
-      case IntegralMethod.Rectangle => rectangle(points)
+      case IntegralMethod.Trapezoidal => trapezoidal(points)
     }
   }
 }
