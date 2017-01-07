@@ -40,7 +40,6 @@ object Integral {
   def s(points: Seq[(Double, Double)], method: IntegralMethod = IntegralMethod.Rectangle): Double = {
     method match {
       case IntegralMethod.Rectangle => rectangle(points)
-      case _ => rectangle(points)
     }
   }
 }
