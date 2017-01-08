@@ -24,9 +24,7 @@ object Integral {
     */
   private def trapezoidal(points: Seq[(Double, Double)]): Double = {
     var s = 0.0
-    for (i <- 1 until points.size) {
-      s += (points(i - 1)._2 + points(i)._2) * 0.5 * (points(i)._1 - points(i - 1)._1)
-    }
+    points.indices.foreach(i=> if (i > 0) s += (points(i - 1)._2 + points(i)._2) * 0.5 * (points(i)._1 - points(i - 1)._1))
     s
   }
 
