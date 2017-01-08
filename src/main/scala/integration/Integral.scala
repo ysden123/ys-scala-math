@@ -4,7 +4,7 @@ import integration.IntegralMethod.IntegralMethod
 
 object IntegralMethod extends Enumeration {
   type IntegralMethod = Value
-  val Rectangle, Trapezoidal = Value
+  val Rectangle, Simpson, Trapezoidal = Value
 }
 
 /**
@@ -72,6 +72,18 @@ object Integral {
     s
   }
 
+  private def simpson(f: Double => Double, xStart: Double, xEnd: Double, n: Int): Double = {
+    var s = 0.0
+    val step = (xEnd - xStart) / n
+    for (i <- 0 until n) {
+      val x1 = xStart + step * i
+      val x2 = xStart + step * (i + 1)
+      val x1_2 = (x2 + x1) * 0.5
+      s += (step / 6) * (f(x1) + 4.0 * f(x1_2) + f(x2))
+    }
+    s
+  }
+
   /**
     * Computes integration for points
     *
@@ -95,6 +107,7 @@ object Integral {
   def s(f: Double => Double, xStart: Double, xEnd: Double, n: Int, method: IntegralMethod = IntegralMethod.Rectangle): Double = {
     method match {
       case IntegralMethod.Rectangle => rectangle(f, xStart, xEnd, n)
+      case IntegralMethod.Simpson => simpson(f, xStart, xEnd, n)
       case IntegralMethod.Trapezoidal => trapezoidal(f, xStart, xEnd, n)
       case _ => throw new RuntimeException(s"Unsupported method $method")
     }

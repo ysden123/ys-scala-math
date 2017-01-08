@@ -55,4 +55,15 @@ class IntegralTest extends FlatSpec with Matchers {
     r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Trapezoidal)
     Math.abs(r - 4.5) should be < 0.0001
   }
+
+  it should "compute integration with simpson method" in {
+    var r = Integral.s((x) => x, 0.0, 3.0, 10, IntegralMethod.Simpson)
+    Math.abs(r - 4.5) should be < 0.0001
+
+    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Simpson)
+    Math.abs(r - 4.5) should be < 0.0001
+
+    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Simpson)
+    Math.abs(r - 4.5) should be < 0.0001
+  }
 }
