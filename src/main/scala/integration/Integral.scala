@@ -24,14 +24,26 @@ object Integral {
     */
   private def trapezoidal(points: Seq[(Double, Double)]): Double = {
     var s = 0.0
-    points.indices.foreach(i=> if (i > 0) s += (points(i - 1)._2 + points(i)._2) * 0.5 * (points(i)._1 - points(i - 1)._1))
+    points.indices.foreach(i => if (i > 0) s += (points(i - 1)._2 + points(i)._2) * 0.5 * (points(i)._1 - points(i - 1)._1))
     s
   }
 
+  /**
+    * Computes integration by formula for trapezoidal method.
+    *
+    * Result is sum of (f(x1) + f(x2)) / 2)*(x2 - x1)
+    *
+    * @param f      the function to compute f(x)
+    * @param xStart start value of x
+    * @param xEnd   end value of x
+    * @param n      number of points
+    * @return value of integration
+    */
   private def trapezoidal(f: Double => Double, xStart: Double, xEnd: Double, n: Int): Double = {
     var s = 0.0
     val step = (xEnd - xStart) / n
     for (i <- 0 until n) {
+      println(s"i=$i")
       val x1 = xStart + step * i
       val x2 = xStart + step * (i + 1)
       s += (f(x1) + f(x2)) * step
@@ -39,6 +51,17 @@ object Integral {
     s * 0.5
   }
 
+  /**
+    * Computes integration by formula for rectangle method.
+    *
+    * Result is sum of (f(x1 + x2) / 2)*(x2 -x1)
+    *
+    * @param f      the function to compute f(x)
+    * @param xStart start value of x
+    * @param xEnd   end value of x
+    * @param n      number of points
+    * @return value of integration
+    */
   private def rectangle(f: Double => Double, xStart: Double, xEnd: Double, n: Int): Double = {
     var s = 0.0
     val step = (xEnd - xStart) / n
