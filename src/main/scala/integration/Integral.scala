@@ -43,7 +43,6 @@ object Integral {
     var s = 0.0
     val step = (xEnd - xStart) / n
     for (i <- 0 until n) {
-      println(s"i=$i")
       val x1 = xStart + step * i
       val x2 = xStart + step * (i + 1)
       s += (f(x1) + f(x2)) * step
@@ -68,7 +67,7 @@ object Integral {
     for (i <- 0 until n) {
       val x1 = xStart + step * i
       val x2 = xStart + step * (i + 1)
-      s += f((x1 + x2) / 2) * step
+      s += f((x1 + x2) * 0.5) * step
     }
     s
   }
