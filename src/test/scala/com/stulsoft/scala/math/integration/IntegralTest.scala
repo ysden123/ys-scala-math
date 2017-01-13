@@ -4,7 +4,6 @@
 
 package com.stulsoft.scala.math.integration
 
-import integration.{Integral, IntegralMethod}
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
