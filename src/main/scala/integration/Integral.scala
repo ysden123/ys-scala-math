@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2017. Yuriy Stul
+ */
+
 package integration
 
 import integration.IntegralMethod.IntegralMethod
