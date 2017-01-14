@@ -7,6 +7,8 @@ package com.stulsoft.scala.math.interpolation
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
+  * Unit tests for PiecewiseLinearInterpolation class
+  *
   * @author Yuriy Stul
   */
 class PiecewiseLinearInterpolationTest extends FlatSpec with Matchers {

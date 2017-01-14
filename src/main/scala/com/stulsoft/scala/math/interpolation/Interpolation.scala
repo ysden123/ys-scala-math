@@ -41,13 +41,14 @@ trait Interpolation {
   */
 object InterpolationMethod extends Enumeration {
   type InterpolationMethod = Value
-  val PiecewiseLinear = Value
+  val PiecewiseLinear, PiecewiseQuadratic = Value
 }
 
 object Interpolation {
   def getInterpolation(method: InterpolationMethod, points: Seq[(Double, Double)]): Interpolation = {
-    method match{
+    method match {
       case InterpolationMethod.PiecewiseLinear => PiecewiseLinearInterpolation(points)
+      case InterpolationMethod.PiecewiseQuadratic => PiecewiseQuadraticInterpolation(points)
       case _ => throw new RuntimeException(s"Unsupported method $method")
     }
   }
