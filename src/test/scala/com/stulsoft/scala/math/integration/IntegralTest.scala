@@ -1,6 +1,9 @@
+/*
+ * Copyright (c) 2017. Yuriy Stul
+ */
+
 package com.stulsoft.scala.math.integration
 
-import integration.{Integral, IntegralMethod}
 import org.scalatest.{FlatSpec, Matchers}
 
 /**
@@ -9,7 +12,13 @@ import org.scalatest.{FlatSpec, Matchers}
   * @author Yuriy Stul
   */
 class IntegralTest extends FlatSpec with Matchers {
-  behavior of "IntegralTest"
+  behavior of "Integral"
+
+  "constructor" should "prevent usage of unsupported interpolation method" in {
+    assertThrows[RuntimeException] {
+      Integral.s((x) => x, 0.0, 3.0, 10, null)
+    }
+  }
 
   "s" should "compute integration with trapezoidal method for points" in {
     var r = Integral.s(List((1.0, 2.0), (2.0, 3.0)))

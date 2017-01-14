@@ -1,6 +1,10 @@
-package integration
+/*
+ * Copyright (c) 2017. Yuriy Stul
+ */
 
-import integration.IntegralMethod.IntegralMethod
+package com.stulsoft.scala.math.integration
+
+import IntegralMethod.IntegralMethod
 
 object IntegralMethod extends Enumeration {
   type IntegralMethod = Value
