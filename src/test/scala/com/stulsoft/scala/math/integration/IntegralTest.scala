@@ -14,6 +14,12 @@ import org.scalatest.{FlatSpec, Matchers}
 class IntegralTest extends FlatSpec with Matchers {
   behavior of "Integral"
 
+  "constructor" should "prevent usage of unsupported interpolation method" in {
+    assertThrows[RuntimeException] {
+      Integral.s((x) => x, 0.0, 3.0, 10, null)
+    }
+  }
+
   "s" should "compute integration with trapezoidal method for points" in {
     var r = Integral.s(List((1.0, 2.0), (2.0, 3.0)))
     r should equal(2.5)

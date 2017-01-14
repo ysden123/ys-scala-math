@@ -10,20 +10,7 @@ package com.stulsoft.scala.math.interpolation
   * @param points sequence of points (x, y)
   * @author Yuriy Stul
   */
-case class PiecewiseLinearInterpolation(points: Seq[(Double, Double)]) {
-  require(points != null, "The points must be specified.")
-  require(points.size > 1, "The points must contain at least two items.")
-
-  // Validate input sequence
-  points.tail
-    .foldLeft(points.head._1) {
-      (prev, current) => {
-        if (current._1 <= prev)
-          throw new IllegalArgumentException("Unsorted input sequence")
-        else
-          current._1
-      }
-    }
+protected case class PiecewiseLinearInterpolation(var points: Seq[(Double, Double)]) extends Interpolation{
 
   /**
     * Computes a interpolated value
