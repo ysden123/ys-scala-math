@@ -16,6 +16,10 @@ trait Interpolation {
   require(points != null, "The points must be specified.")
   require(points.size > 1, "The points must contain at least two items.")
 
+  if (isInstanceOf[PiecewiseQuadraticInterpolation])
+    require(points.size > 2, "The points must contain at least three items.")
+
+
   // Validate input sequence
   points.tail
     .foldLeft(points.head._1) {
@@ -26,6 +30,10 @@ trait Interpolation {
           current._1
       }
     }
+  protected val startPoint: (Double, Double) = points.head
+  protected val endPoint: (Double, Double) = points.reverse.head
+  protected val preEndPoint: (Double, Double) = points.reverse.tail.head
+  protected val prePreEndPoint: (Double, Double) = points.reverse.tail.tail.head
 
   /**
     * Computes a interpolated value

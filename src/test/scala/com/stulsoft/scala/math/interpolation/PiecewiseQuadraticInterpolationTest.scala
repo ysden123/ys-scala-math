@@ -27,4 +27,14 @@ class PiecewiseQuadraticInterpolationTest extends FlatSpec with Matchers {
     }
   }
 
+  "get" should "compute value" in {
+    val c = Interpolation.getInterpolation(InterpolationMethod.PiecewiseQuadratic,
+      Seq((1.0, 1.0), (2.0, 2.0), (3.0, 3.0)))
+    c.get(1.0) should be(1.0)
+    c.get(1.5) should be(1.5)
+    c.get(2.0) should be(2.0)
+    c.get(2.9) should be(2.9)
+    c.get(3.0) should be(3.0)
+  }
+
 }

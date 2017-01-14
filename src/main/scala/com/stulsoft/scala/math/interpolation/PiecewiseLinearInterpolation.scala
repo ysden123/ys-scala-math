@@ -22,9 +22,8 @@ protected case class PiecewiseLinearInterpolation(var points: Seq[(Double, Doubl
     val startAndEndX = getBoundPoints(x)
 
     if (startAndEndX.isEmpty) {
-      val lastPoint = points.reverse.head
-      if (Math.abs(lastPoint._1 - x) < 0.000001)
-        return lastPoint._2
+      if (Math.abs(endPoint._1 - x) < 0.000001)
+        return endPoint._2
       else
         throw new IllegalArgumentException(s"Argument $x is out of boundary [${points.head._1} - ${points.reverse.head._1}]")
     }
