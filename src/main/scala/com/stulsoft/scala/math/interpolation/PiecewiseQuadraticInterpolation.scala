@@ -45,7 +45,7 @@ protected case class PiecewiseQuadraticInterpolation(var points: Seq[(Double, Do
     var secondPoint: (Double, Double) = null
     var thirdPoint: (Double, Double) = null
 
-    firstPoint = points.find(p => p._1 <= x).get
+    firstPoint = points.find(p => p._1 >= x).get
     if (firstPoint == endPoint) {
       firstPoint = prePreEndPoint
       secondPoint = preEndPoint
