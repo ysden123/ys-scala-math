@@ -2,7 +2,7 @@
  * Copyright (c) 2017. Yuriy Stul
  */
 
-package com.stulsoft.scala.math.assessment
+package com.stulsoft.scala.math.assessment.interpolation
 
 import com.stulsoft.scala.math.interpolation.{Interpolation, InterpolationMethod}
 
@@ -11,7 +11,7 @@ import com.stulsoft.scala.math.interpolation.{Interpolation, InterpolationMethod
   *
   * @author Yuriy Stul
   */
-object PiecewiseLinearAssessment extends App {
+private object InterpolationAssessment extends App {
   lazy val step = 0.5
   // Prepare data
   lazy val sinusData = (0.001 to 10.00 by step)

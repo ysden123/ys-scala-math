@@ -11,68 +11,68 @@ import org.scalatest.{FlatSpec, Matchers}
   *
   * @author Yuriy Stul
   */
-class IntegralTest extends FlatSpec with Matchers {
-  behavior of "Integral"
+class IntegrationTest extends FlatSpec with Matchers {
+  behavior of "Integration"
 
   "constructor" should "prevent usage of unsupported interpolation method" in {
     assertThrows[RuntimeException] {
-      Integral.s((x) => x, 0.0, 3.0, 10, null)
+      Integration.s((x) => x, 0.0, 3.0, 10, null)
     }
   }
 
   "s" should "compute integration with trapezoidal method for points" in {
-    var r = Integral.s(List((1.0, 2.0), (2.0, 3.0)))
+    var r = Integration.s(List((1.0, 2.0), (2.0, 3.0)))
     r should equal(2.5)
 
-    r = Integral.s(List((1.0, 2.0), (2.0, 3.0), (3.0, 4.0)))
+    r = Integration.s(List((1.0, 2.0), (2.0, 3.0), (3.0, 4.0)))
     r should equal(6.0)
 
-    r = Integral.s(List((0, 0), (1, 1), (2, 2)))
+    r = Integration.s(List((0, 0), (1, 1), (2, 2)))
     r should equal(Math.pow(2.0, 2.0) / 2.0)
   }
 
   it should "compute 0 for empty collection" in {
-    val r = Integral.s(List())
+    val r = Integration.s(List())
     r should equal(0.0)
   }
 
   it should "compute 0 for collection with 1 item" in {
-    val r = Integral.s(List((1.0, 2.0)))
+    val r = Integration.s(List((1.0, 2.0)))
     r should equal(0.0)
   }
 
   "s" should "compute integration with rectangle method for function" in {
-    var r = Integral.s((x) => x, 0.0, 3.0, 10, IntegralMethod.Rectangle)
+    var r = Integration.s((x) => x, 0.0, 3.0, 10, IntegrationMethod.Rectangle)
     Math.abs(r - 4.5) should be < 0.0001
 
-    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Rectangle)
+    r = Integration.s((x) => x, 0.0, 3.0, 100, IntegrationMethod.Rectangle)
     Math.abs(r - 4.5) should be < 0.0001
   }
 
   it should "compute integration with rectangle method for function with default method" in {
-    val r = Integral.s((x) => x, 0.0, 3.0, 10)
+    val r = Integration.s((x) => x, 0.0, 3.0, 10)
     Math.abs(r - 4.5) should be < 0.0001
   }
 
   it should "compute integration with trapezoidal method" in {
-    var r = Integral.s((x) => x, 0.0, 3.0, 10, IntegralMethod.Trapezoidal)
+    var r = Integration.s((x) => x, 0.0, 3.0, 10, IntegrationMethod.Trapezoidal)
     Math.abs(r - 4.5) should be < 0.0001
 
-    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Trapezoidal)
+    r = Integration.s((x) => x, 0.0, 3.0, 100, IntegrationMethod.Trapezoidal)
     Math.abs(r - 4.5) should be < 0.0001
 
-    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Trapezoidal)
+    r = Integration.s((x) => x, 0.0, 3.0, 100, IntegrationMethod.Trapezoidal)
     Math.abs(r - 4.5) should be < 0.0001
   }
 
   it should "compute integration with simpson method" in {
-    var r = Integral.s((x) => x, 0.0, 3.0, 10, IntegralMethod.Simpson)
+    var r = Integration.s((x) => x, 0.0, 3.0, 10, IntegrationMethod.Simpson)
     Math.abs(r - 4.5) should be < 0.0001
 
-    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Simpson)
+    r = Integration.s((x) => x, 0.0, 3.0, 100, IntegrationMethod.Simpson)
     Math.abs(r - 4.5) should be < 0.0001
 
-    r = Integral.s((x) => x, 0.0, 3.0, 100, IntegralMethod.Simpson)
+    r = Integration.s((x) => x, 0.0, 3.0, 100, IntegrationMethod.Simpson)
     Math.abs(r - 4.5) should be < 0.0001
   }
 }
