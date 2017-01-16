@@ -2,7 +2,7 @@
  * Copyright (c) 2017. Yuriy Stul
  */
 
-package com.stulsoft.scala.math.assessment.interpolation
+package com.stulsoft.scala.math.assessment
 
 import com.stulsoft.scala.math.interpolation.{Interpolation, InterpolationMethod}
 
