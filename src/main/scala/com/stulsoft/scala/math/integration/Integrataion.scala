@@ -4,9 +4,9 @@
 
 package com.stulsoft.scala.math.integration
 
-import IntegralMethod.IntegralMethod
+import IntegrationMethod.IntegralMethod
 
-object IntegralMethod extends Enumeration {
+object IntegrationMethod extends Enumeration {
   type IntegralMethod = Value
   val Rectangle, Simpson, Trapezoidal = Value
 }
@@ -16,7 +16,7 @@ object IntegralMethod extends Enumeration {
   *
   * @author Yuriy Stul
   */
-object Integral {
+object Integration {
 
   /**
     * Computes integration by formula for trapezoidal method.
@@ -108,11 +108,11 @@ object Integral {
     * @param method a method; optional, Rectangle is default method
     * @return value of integration
     */
-  def s(f: Double => Double, xStart: Double, xEnd: Double, n: Int, method: IntegralMethod = IntegralMethod.Rectangle): Double = {
+  def s(f: Double => Double, xStart: Double, xEnd: Double, n: Int, method: IntegralMethod = IntegrationMethod.Rectangle): Double = {
     method match {
-      case IntegralMethod.Rectangle => rectangle(f, xStart, xEnd, n)
-      case IntegralMethod.Simpson => simpson(f, xStart, xEnd, n)
-      case IntegralMethod.Trapezoidal => trapezoidal(f, xStart, xEnd, n)
+      case IntegrationMethod.Rectangle => rectangle(f, xStart, xEnd, n)
+      case IntegrationMethod.Simpson => simpson(f, xStart, xEnd, n)
+      case IntegrationMethod.Trapezoidal => trapezoidal(f, xStart, xEnd, n)
       case _ => throw new RuntimeException(s"Unsupported method $method")
     }
   }
