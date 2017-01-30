@@ -68,16 +68,30 @@ class MatrixDouble(m: Array[Array[Double]]) extends Matrix(m: Array[Array[Double
   }
 }
 
-object Test extends App {
-  val m = new Matrix[Int](Array(
-    Array(1, 2, 3),
-    Array(10, 20, 30)
-  ))
-  println(m)
+/**
+  * Matrix arithmetic
+  *
+  * @param m matrix
+  */
+class MatrixInt(m: Array[Array[Int]]) extends Matrix(m: Array[Array[Int]]) {
+  /**
+    * Multiplication
+    *
+    * @param that multiplier
+    * @return product of this matrix on that matrix
+    */
+  def *(that: MatrixInt): MatrixInt = {
+    require(m(0).length == that.m.length, "Number of columns in 1st matrix (m) must be equal to number of rows in second matrix (that)")
 
-  val mDouble = new MatrixDouble(Array(
-    Array(1.0, 2.0, 3.0),
-    Array(10.0, 20.0, 30.0)
-  ))
-  println(mDouble)
+    // Initialize result matrix
+    val c = Array.fill[Int](m.length, that.m(0).length)(0)
+    m.indices.foreach(i => {
+      that.m(0).indices.foreach(j => {
+        m(0).indices.foreach(r => {
+          c(i)(j) += m(i)(r) * that.m(r)(j)
+        })
+      })
+    })
+    new MatrixInt(c)
+  }
 }

@@ -100,7 +100,29 @@ class MatrixTest extends FlatSpec with Matchers {
     )))
   }
 
-  "transpose" should "transpose a vector" in {
+  "MatrixInt" should "compute product of two square matrices" in {
+    val a = new MatrixInt(Array(
+      Array(1, 2),
+      Array(2, 3)))
+    val b = new MatrixInt(Array(
+      Array(10, 20),
+      Array(20, 30)))
+    a * b should equal(b * a)
+  }
+
+  it should "prevent usage of incorrect arguments" in {
+    val a = new MatrixInt(Array(
+      Array(1, 2),
+      Array(2, 3)))
+    assertThrows[IllegalArgumentException] {
+      a * new MatrixInt(Array.ofDim[Int](1, 0))
+    }
+    assertThrows[IllegalArgumentException] {
+      a * new MatrixInt(Array.ofDim[Int](1, 3))
+    }
+  }
+
+  "Matrix: transpose" should "transpose a vector" in {
     val m1 = new Matrix(Array(
       Array(1.0),
       Array(2.0),
