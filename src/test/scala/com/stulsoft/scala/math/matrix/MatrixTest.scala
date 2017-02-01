@@ -13,11 +13,11 @@ import org.scalatest.{FlatSpec, Matchers}
   */
 class MatrixTest extends FlatSpec with Matchers {
   behavior of "Matrix"
-  "Matrix" should "support equals operator" in {
-    val a = Matrix[Double](Array(
+  "MatrixDouble" should "support equals operator" in {
+    val a = new MatrixDouble(Array(
       Array(1.0, 2.0),
       Array(2.0, 3.0)))
-    val b = Matrix[Double](Array(
+    val b = new MatrixDouble(Array(
       Array(1.0, 2.0),
       Array(2.0, 3.0)))
 
@@ -25,7 +25,7 @@ class MatrixTest extends FlatSpec with Matchers {
   }
 
   it should "support toString implementation" in {
-    val m = Matrix[Double](Array(
+    val m = new MatrixDouble(Array(
       Array(1.0, 2.0),
       Array(2.0, 3.0)))
     m.toString shouldBe a [String]
@@ -33,103 +33,125 @@ class MatrixTest extends FlatSpec with Matchers {
 
   "constructor" should "prevent usage of incorrect arguments" in {
     assertThrows[IllegalArgumentException] {
-      Matrix[Double](null)
+      new Matrix(null)
     }
     assertThrows[IllegalArgumentException] {
-      Matrix[Int](Array.ofDim[Int](0, 0))
+      new Matrix(Array.ofDim[Int](0, 0))
     }
     assertThrows[IllegalArgumentException] {
-      Matrix[Int](Array.ofDim[Int](0, 1))
+      new Matrix(Array.ofDim[Int](0, 1))
     }
   }
 
   "*" should "compute product of two square matrices" in {
-    val a = Matrix[Double](Array(
+    val a = new MatrixDouble(Array(
       Array(1.0, 2.0),
       Array(2.0, 3.0)))
-    val b = Matrix[Double](Array(
+    val b = new MatrixDouble(Array(
       Array(10.0, 20.0),
       Array(20.0, 30.0)))
     a * b should equal(b * a)
   }
 
   it should "prevent usage of incorrect arguments" in {
-    val a = Matrix[Double](Array(
+    val a = new MatrixDouble(Array(
       Array(1, 2),
       Array(2, 3)))
     assertThrows[IllegalArgumentException] {
-      a * Matrix(Array.ofDim[Double](1, 0))
+      a * new MatrixDouble(Array.ofDim[Double](1, 0))
     }
     assertThrows[IllegalArgumentException] {
-      a * Matrix(Array.ofDim[Double](1, 3))
+      a * new MatrixDouble(Array.ofDim[Double](1, 3))
     }
   }
 
   it should "compute product of two rectangle matrices" in {
-    val a = Matrix[Double](Array(
+    val a = new MatrixDouble(Array(
       Array(-1.0, 1.0),
       Array(2.0, 0.0),
       Array(0.0, 3.0)))
-    val b = Matrix[Double](Array(
+    val b = new MatrixDouble(Array(
       Array(3.0, 1.0, 2.0),
       Array(0.0, -1.0, 4.0)))
 
-    a * b should equal(Matrix[Double](Array(
+    a * b should equal(new MatrixDouble(Array(
       Array(-3.0, -2.0, 2.0),
       Array(6.0, 2.0, 4.0),
       Array(0.0, -3.0, 12.0)
     )))
 
-    b * a should equal(Matrix(Array(
+    b * a should equal(new MatrixDouble(Array(
       Array(-1.0, 9.0),
       Array(-2.0, 12.0))))
   }
 
   it should "compute product of matrix and vector" in {
-    val a = Matrix[Double](Array(
+    val a = new MatrixDouble(Array(
       Array(2.0, 0.0, 4.0, -1.0),
       Array(1.0, -1.0, 1.0, 0.0)))
-    val b = Matrix[Double](Array(
+    val b = new MatrixDouble(Array(
       Array(2.0),
       Array(1.0),
       Array(0.0),
       Array(-2.0)))
-    a * b should equal(Matrix[Double](Array(
+    a * b should equal(new MatrixDouble(Array(
       Array(6.0),
       Array(1.0)
     )))
   }
 
-  "transpose" should "transpose a vector" in {
-    val m1 = Matrix[Double](Array(
+  "MatrixInt" should "compute product of two square matrices" in {
+    val a = new MatrixInt(Array(
+      Array(1, 2),
+      Array(2, 3)))
+    val b = new MatrixInt(Array(
+      Array(10, 20),
+      Array(20, 30)))
+    a * b should equal(b * a)
+  }
+
+  it should "prevent usage of incorrect arguments" in {
+    val a = new MatrixInt(Array(
+      Array(1, 2),
+      Array(2, 3)))
+    assertThrows[IllegalArgumentException] {
+      a * new MatrixInt(Array.ofDim[Int](1, 0))
+    }
+    assertThrows[IllegalArgumentException] {
+      a * new MatrixInt(Array.ofDim[Int](1, 3))
+    }
+  }
+
+  "Matrix: transpose" should "transpose a vector" in {
+    val m1 = new Matrix(Array(
       Array(1.0),
       Array(2.0),
       Array(3.0),
       Array(4.0),
       Array(5.0)
     ))
-    m1.transpose() should equal(Matrix[Double](Array(
+    m1.transpose() should equal(new Matrix(Array(
       Array(1.0, 2.0, 3.0, 4.0, 5.0)
     )))
   }
 
   it should "transpose a square matrix" in {
-    val m1 = Matrix[Double](Array(
+    val m1 = new Matrix(Array(
       Array(1.0, 2.0),
       Array(3.0, 4.0)
     ))
-    m1.transpose() should equal(Matrix[Double](Array(
+    m1.transpose() should equal(new Matrix(Array(
       Array(1.0, 3.0),
       Array(2.0, 4.0)
     )))
   }
 
   it should "transpose a rectangle matrix" in {
-    val m1 = Matrix[Double](Array(
+    val m1 = new Matrix(Array(
       Array(1.0, 2.0, 3.0),
       Array(4.0, 5.0, 6.0)
     ))
-    m1.transpose() should equal(Matrix[Double](Array(
+    m1.transpose() should equal(new Matrix(Array(
       Array(1.0, 4.0),
       Array(2.0, 5.0),
       Array(3.0, 6.0)
