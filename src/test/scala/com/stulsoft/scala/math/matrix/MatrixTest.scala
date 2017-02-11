@@ -55,13 +55,13 @@ class MatrixTest extends FlatSpec with Matchers {
 
   it should "prevent usage of incorrect arguments" in {
     val a = new MatrixDouble(Array(
-      Array(1, 2),
-      Array(2, 3)))
+      Array(1.0, 2.0),
+      Array(2.0, 3.0)))
     assertThrows[IllegalArgumentException] {
-      a * new MatrixDouble(Array.ofDim[Double](1, 0))
+      a * new MatrixDouble(Array.ofDim[java.lang.Double](1, 0))
     }
     assertThrows[IllegalArgumentException] {
-      a * new MatrixDouble(Array.ofDim[Double](1, 3))
+      a * new MatrixDouble(Array.ofDim[java.lang.Double](1, 3))
     }
   }
 
@@ -115,10 +115,10 @@ class MatrixTest extends FlatSpec with Matchers {
       Array(1, 2),
       Array(2, 3)))
     assertThrows[IllegalArgumentException] {
-      a * new MatrixInt(Array.ofDim[Int](1, 0))
+      a * new MatrixInt(Array.ofDim[java.lang.Integer](1, 0))
     }
     assertThrows[IllegalArgumentException] {
-      a * new MatrixInt(Array.ofDim[Int](1, 3))
+      a * new MatrixInt(Array.ofDim[java.lang.Integer](1, 3))
     }
   }
 

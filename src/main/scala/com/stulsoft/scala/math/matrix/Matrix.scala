@@ -45,7 +45,7 @@ class Matrix[T: ClassTag](val m: Array[Array[T]]) {
   *
   * @param m matrix
   */
-class MatrixDouble(m: Array[Array[Double]]) extends Matrix(m: Array[Array[Double]]) {
+class MatrixDouble(m: Array[Array[java.lang.Double]]) extends Matrix(m: Array[Array[java.lang.Double]]) {
   /**
     * Multiplication
     *
@@ -56,7 +56,7 @@ class MatrixDouble(m: Array[Array[Double]]) extends Matrix(m: Array[Array[Double
     require(m(0).length == that.m.length, "Number of columns in 1st matrix (m) must be equal to number of rows in second matrix (that)")
 
     // Initialize result matrix
-    val c = Array.fill[Double](m.length, that.m(0).length)(0.0)
+    val c = Array.fill[java.lang.Double](m.length, that.m(0).length)(0.0)
     m.indices.foreach(i => {
       that.m(0).indices.foreach(j => {
         m(0).indices.foreach(r => {
@@ -73,7 +73,7 @@ class MatrixDouble(m: Array[Array[Double]]) extends Matrix(m: Array[Array[Double
   *
   * @param m matrix
   */
-class MatrixInt(m: Array[Array[Int]]) extends Matrix(m: Array[Array[Int]]) {
+class MatrixInt(m: Array[Array[java.lang.Integer]]) extends Matrix(m: Array[Array[java.lang.Integer]]) {
   /**
     * Multiplication
     *
@@ -84,7 +84,7 @@ class MatrixInt(m: Array[Array[Int]]) extends Matrix(m: Array[Array[Int]]) {
     require(m(0).length == that.m.length, "Number of columns in 1st matrix (m) must be equal to number of rows in second matrix (that)")
 
     // Initialize result matrix
-    val c = Array.fill[Int](m.length, that.m(0).length)(0)
+    val c = Array.fill[java.lang.Integer](m.length, that.m(0).length)(0)
     m.indices.foreach(i => {
       that.m(0).indices.foreach(j => {
         m(0).indices.foreach(r => {
